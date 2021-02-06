@@ -1,15 +1,29 @@
 <template>
   <button
     class="waste"
-    @click="$router.push({ name: 'Form', params: { type: } })"
+    @click="
+      $router.push({ name: `${type.path}`, params: { waste: type.name } })
+    "
   >
-    <img src="@/assets/logo.png" height="50" width="50" />
-    <p>Toxic</p>
+    <img :src="getImg(type.image)" height="50" width="50" />
+    <p>{{ type.name }}</p>
   </button>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["type"],
+  data() {
+    return {
+      // wasteType: type.name,
+    };
+  },
+  methods: {
+    getImg(image) {
+      return require(`@/assets/waste-icon/${image}.png`);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -26,5 +40,10 @@ export default {};
   display: block;
   height: 9rem;
   width: 9rem;
+}
+p {
+  font-size: 1rem;
+  line-height: 125%;
+  color: black;
 }
 </style>

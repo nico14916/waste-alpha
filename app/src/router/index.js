@@ -25,9 +25,14 @@ const routes = [
     component: () => import("../views/Register.vue"),
   },
   {
-    path: "/form",
+    path: "/form/:waste",
     name: "Form",
     component: () => import("../views/Form.vue"),
+  },
+  {
+    path: "/user",
+    name: "User",
+    component: () => import("../views/User.vue"),
   },
 ];
 
