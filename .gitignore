@@ -2,3 +2,5 @@
 **/.env
 
 app/dist
+
+waste.yaml
