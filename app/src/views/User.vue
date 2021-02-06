@@ -8,5 +8,7 @@
 export default { name: "User" };
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import "@/theme.scss";
+
 </style>

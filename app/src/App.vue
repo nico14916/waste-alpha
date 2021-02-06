@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <Navigation />
+    <Header />
     <router-view class="router-view" />
   </div>
 </template>
 
 <script>
-import Navigation from "@/components/Navigation.vue";
+import Header from "@/components/Header.vue";
 export default {
   components: {
-    Navigation,
+    Header,
   },
   beforeCreate() {
     //this.$store.dispatch("init");

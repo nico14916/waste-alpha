@@ -44,7 +44,7 @@ export default {
           id: 5,
           image: "icons8-toxic-material-100",
           name: "peinture et matiere dangeureuse",
-          path: "User",
+          path: "Form",
         },
         { id: 6, image: "icons8-user-folder-100", name: "user", path: "User" },
       ],

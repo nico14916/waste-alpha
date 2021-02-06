@@ -1,13 +1,35 @@
 <template>
   <div>
-    <p>The Form</p>
-    <p>{{ $route.params.waste }}</p>
+    <p>Demande de récuperation pour {{ type }}</p>
+    <Adress />
+    <GoogleMap />
+    <hr />
+    <Quantity />
+    <hr />
+    <AddImg />
   </div>
 </template>
 
 <script>
-export default { name: "Form", components: {} };
+import GoogleMap from "../components/GoogleMap.vue";
+import Adress from "../components/Adress.vue";
+import Quantity from "../components/Quantity.vue";
+import AddImg from "@/components/AddImg.vue";
+
+export default {
+  name: "Form",
+  components: { Adress, GoogleMap, Quantity, AddImg },
+  data() {
+    return { type: this.$route.params.waste };
+  },
+};
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import "@/theme.scss";
+
+p {
+  margin-top: 1rem;
+  font-weight: bold;
+}
 </style>
