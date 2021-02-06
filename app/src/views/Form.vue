@@ -2,7 +2,6 @@
   <div>
     <p>Demande de récuperation pour {{ type }}</p>
     <Adress />
-    <GoogleMap />
     <hr />
     <Quantity />
     <hr />
@@ -11,14 +10,13 @@
 </template>
 
 <script>
-import GoogleMap from "../components/GoogleMap.vue";
 import Adress from "../components/Adress.vue";
 import Quantity from "../components/Quantity.vue";
 import AddImg from "@/components/AddImg.vue";
 
 export default {
   name: "Form",
-  components: { Adress, GoogleMap, Quantity, AddImg },
+  components: { Adress, Quantity, AddImg },
   data() {
     return { type: this.$route.params.waste };
   },
