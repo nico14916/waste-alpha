@@ -4,8 +4,8 @@
       Information
     </button>
     <button class="mid" @click="$router.push({ name: 'Actif' })">Actif</button>
-    <button class="right" @click="$router.push({ name: 'Inactif' })">
-      Inactif
+    <button class="right" @click="$router.push({ name: 'History' })">
+      Historique
     </button>
   </div>
 </template>

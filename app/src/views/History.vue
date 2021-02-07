@@ -1,11 +1,8 @@
 <template>
   <div>
     <UserMenu />
-    <div class="container">
-      <div class="up">
-        <h2>Demande Inactif</h2>
-      </div>
-    </div>
+    <h2>Historique</h2>
+    <div v-for="job in jobs" :key="job.id"><Job :job="job" /></div>
     <div class="choise">
       <button class="left" @click="$router.push({ name: 'Home' })">Back</button>
     </div>
@@ -19,6 +16,16 @@ export default {
   name: "History",
   components: {
     UserMenu,
+  },
+  data() {
+    return {
+      jobs: [],
+    };
+  },
+  created() {
+    this.$http
+      .get(`${this.$apiUrl}/wastes?status=done`)
+      .then((res) => (this.jobs = res.data));
   },
 };
 </script>
