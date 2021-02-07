@@ -3,6 +3,7 @@ const knex = require('../knex');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const secure = require('../secure');
+const { date } = require('joi');
 
 const wasteSchema = Joi.object({
     type: Joi.string().max(100).required(),
@@ -19,6 +20,7 @@ router.post('/', secure({status:'verified'}),async (req, res) => {
     try {
         let waste = {
             ...validated.value,
+            createdDate: new Date(),
             userID: req.user.id
         };
         await knex('wastes').insert(waste);
