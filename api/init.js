@@ -55,6 +55,13 @@ module.exports = async () => {
         });
         version++;
     }
+
+    if (version == 3) {
+        await knex.schema.table('wastes', (table) => {
+            table.string('uuid', 36);
+        });
+        version++;
+    }
     
 
     await knex('meta').where({ meta: 'db_version' }).update({ value: version });

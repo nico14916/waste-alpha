@@ -37,11 +37,15 @@ export default {
   },
   methods: {
     send() {
-      if (this.address && this.quantity > 0) {
+      if (this.quantity > 0) {
+        let formData = new FormData();
+        formData.append("type", this.$route.params.waste);
+        formData.append("quantity", this.quantity);
         this.$http
-          .post(`${this.$apiUrl}/wastes`, {
-            address: this.addresss,
-            quantity: this.quantity,
+          .post(`${this.$apiUrl}/wastes`, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
           })
           .then(this.$router.push({ name: "Home" }));
       } else {

@@ -3,14 +3,24 @@ const knex = require('../knex');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const secure = require('../secure');
-const { date } = require('joi');
+const multer = require('multer');
+const AWS = require('aws-sdk');
+
+const s3 = new AWS.S3({
+    endpoint: process.env.S3_ENDPOINT,
+    accessKeyId: process.env.S3_KEY,
+    secretAccessKey: process.env.S3_SECRET,
+    s3ForcePathStyle: true
+});
+
+var upload = multer({ storage: multer.memoryStorage() }).single('image');
 
 const wasteSchema = Joi.object({
     type: Joi.string().max(100).required(),
     quantity: Joi.number().required()
 });
 
-router.post('/', secure({status:'verified'}),async (req, res) => {
+router.post('/', secure({status:'verified'}), upload, async (req, res) => {
     let validated = wasteSchema.validate(req.body);
 
     if (validated.error) {
@@ -19,12 +29,17 @@ router.post('/', secure({status:'verified'}),async (req, res) => {
 
     try {
         let waste = {
-            ...validated.value,
+            type: validated.value.type,
+            quantity: Number(validated.value.quantity),
             createdDate: new Date(),
             userID: req.user.id,
             status: 1
         };
-        await knex('wastes').insert(waste);
+        let id = (await knex('wastes').returning('id').insert(waste))[0];
+        if(req.file){
+            await s3.upload({ Bucket: 'ecoco', Key: `images/${id}.jpg`, Body: req.file.buffer }).promise();
+        }
+        console.log(id);
         return res.sendStatus(201);
     } catch (err) {
         console.log(err);
