@@ -5,7 +5,7 @@
       $router.push({ name: `${type.path}`, params: { waste: type.name } })
     "
   >
-    <img :src="getImg(type.image)" height="50" width="50" />
+    <img :src="getImg(type.image)" height="40" width="40" />
     <p>{{ type.name }}</p>
   </button>
 </template>
@@ -14,9 +14,7 @@
 export default {
   props: ["type"],
   data() {
-    return {
-      // wasteType: type.name,
-    };
+    return {};
   },
   methods: {
     getImg(image) {
@@ -31,18 +29,18 @@ export default {
 
 .waste {
   text-align: center;
-  padding: 1rem;
   margin: 1rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
   text-decoration: none;
   color: white;
   display: block;
-  height: 9rem;
-  width: 9rem;
+  height: 7rem;
+  width: 7rem;
 }
 p {
-  font-size: 1rem;
+  text-align: center;
+  font-size: 0.75rem;
   line-height: 125%;
   color: black;
 }

@@ -1,15 +1,12 @@
 <template>
-  <div>
-    <div>
-      <h2>Search and add a pin</h2>
-      <label>
-        <gmap-autocomplete @place_changed="setPlace"> </gmap-autocomplete>
-        <button @click="addMarker">Add</button>
-      </label>
-      <br />
+  <div class="container">
+    <!-- <p>Entree votre adresse</p> -->
+    <div class="add">
+      <gmap-autocomplete class="gmapAuto" @place_changed="setPlace">
+      </gmap-autocomplete>
+      <button @click="addMarker">Add</button>
     </div>
-    <br />
-    <gmap-map :center="center" :zoom="12" style="width: 100%; height: 400px">
+    <gmap-map :center="center" :zoom="12" style="width: 100%; height: 200px">
       <gmap-marker
         :key="index"
         v-for="(m, index) in markers"
@@ -22,18 +19,16 @@
 
 <script>
 export default {
-  name: "GoogleMap",
+  name: "Gmap",
   data() {
     return {
-      // default to Montreal to keep it simple
-      // change this to whatever makes sense
       center: { lat: 45.508, lng: -73.587 },
       markers: [],
       places: [],
       currentPlace: null,
+      postalCode: "",
     };
   },
-
   mounted() {
     this.geolocate();
   },
@@ -44,7 +39,14 @@ export default {
       this.currentPlace = place;
     },
     addMarker() {
+      if (this.markers) {
+        this.markers = [];
+      }
+      if (this.places) {
+        this.places = [];
+      }
       if (this.currentPlace) {
+        this.postalCode = this.currentPlace.address_components[7].long_name;
         const marker = {
           lat: this.currentPlace.geometry.location.lat(),
           lng: this.currentPlace.geometry.location.lng(),
@@ -68,4 +70,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/theme.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+div > p {
+  flex: 100%;
+  margin-bottom: 1rem;
+}
+.add {
+  display: flex;
+  flex-direction: row;
+}
+.gmapAuto {
+  flex: 70%;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+}
+button {
+  flex: 30%;
+  margin-left: 0.5rem;
+}
 </style>

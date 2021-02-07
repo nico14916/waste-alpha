@@ -13,8 +13,8 @@
 
 <script>
 export default {
-  name: 'Register',
-  
+  name: "Register",
+
   data() {
     return {
       firstname: null,
@@ -22,5 +22,5 @@ export default {
       error: false,
     };
   },
-}
+};
 </script>
