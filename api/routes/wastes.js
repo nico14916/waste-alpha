@@ -37,7 +37,7 @@ router.post('/', secure({status:'verified'}), upload, async (req, res) => {
         };
         let id = (await knex('wastes').returning('id').insert(waste))[0];
         if(req.file){
-            await s3.upload({ Bucket: 'ecoco', Key: `images/${id}.jpg`, Body: req.file.buffer }).promise();
+            await s3.upload({ Bucket: 'ecowaste', Key: `images/${id}.jpg`, Body: req.file.buffer }).promise();
         }
         console.log(id);
         return res.sendStatus(201);

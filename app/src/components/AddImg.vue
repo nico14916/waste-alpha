@@ -11,7 +11,6 @@
     <button
       @click="
         $refs.fileInput.click();
-        sendImage();
       "
     >
       Choisir une photo
@@ -38,8 +37,6 @@ export default {
       };
       // you have to declare the file loading
       reader.readAsDataURL(this.selectedFile);
-    },
-    sendImage() {
       this.$emit("image", this.selectedFile);
     },
   },
