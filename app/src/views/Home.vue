@@ -46,7 +46,7 @@ export default {
           name: "peinture et matiere dangeureuse",
           path: "Form",
         },
-        { id: 6, image: "icons8-user-folder-100", name: "user", path: "User" },
+        { id: 6, image: "icons8-user-folder-100", name: "user", path: "Info" },
       ],
     };
   },

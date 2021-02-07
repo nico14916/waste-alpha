@@ -30,9 +30,19 @@ const routes = [
     component: () => import("../views/Form.vue"),
   },
   {
-    path: "/user",
-    name: "User",
-    component: () => import("../views/User.vue"),
+    path: "/user/information",
+    name: "Info",
+    component: () => import("../views/Information.vue"),
+  },
+  {
+    path: "/user/actif",
+    name: "Actif",
+    component: () => import("../views/Actif.vue"),
+  },
+  {
+    path: "/user/inactif",
+    name: "Inactif",
+    component: () => import("../views/Inactif.vue"),
   },
 ];
 

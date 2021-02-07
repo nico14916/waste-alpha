@@ -14,9 +14,7 @@
 export default {
   props: ["type"],
   data() {
-    return {
-      // wasteType: type.name,
-    };
+    return {};
   },
   methods: {
     getImg(image) {

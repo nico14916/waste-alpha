@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <p>Entree votre adresse</p>
     <div class="add">
       <gmap-autocomplete class="gmapAuto" @place_changed="setPlace">
       </gmap-autocomplete>
@@ -37,6 +38,12 @@ export default {
       this.currentPlace = place;
     },
     addMarker() {
+      if (this.markers) {
+        this.markers = [];
+      }
+      if (this.places) {
+        this.places = [];
+      }
       if (this.currentPlace) {
         const marker = {
           lat: this.currentPlace.geometry.location.lat(),
@@ -69,6 +76,10 @@ export default {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+div > p {
+  flex: 100%;
+  margin-bottom: 1rem;
+}
 .add {
   display: flex;
   flex-direction: row;
@@ -76,6 +87,7 @@ export default {
 .gmapAuto {
   flex: 70%;
   height: 2.5rem;
+  border-radius: 0.25rem;
 }
 button {
   flex: 30%;

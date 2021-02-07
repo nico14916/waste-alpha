@@ -1,6 +1,6 @@
 <template>
   <div class="register">
-      <form @submit.prevent="">
+    <form @submit.prevent="">
       <label for="firstname">Prénom</label>
       <input id="firstname" type="text" v-model="firstname" />
       <label for="lastname">Nom</label>
@@ -13,8 +13,8 @@
 
 <script>
 export default {
-  name: 'Register',
-  
+  name: "Register",
+
   data() {
     return {
       firstname: null,
@@ -22,5 +22,5 @@ export default {
       error: false,
     };
   },
-}
+};
 </script>
