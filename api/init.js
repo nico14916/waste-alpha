@@ -40,6 +40,21 @@ module.exports = async () => {
         
         version++;
     }
+
+    if (version == 1) {
+        await knex.schema.table('wastes', (table) => {
+            table.dateTime('createdDate');
+            table.dateTime('pickupDate');
+        });
+        version++;
+    }
+
+    if (version == 2) {
+        await knex.schema.table('wastes', (table) => {
+            table.integer('status', 1);
+        });
+        version++;
+    }
     
 
     await knex('meta').where({ meta: 'db_version' }).update({ value: version });
