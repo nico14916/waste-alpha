@@ -21,7 +21,8 @@ router.post('/', secure({status:'verified'}),async (req, res) => {
         let waste = {
             ...validated.value,
             createdDate: new Date(),
-            userID: req.user.id
+            userID: req.user.id,
+            status: 1
         };
         await knex('wastes').insert(waste);
         return res.sendStatus(201);
@@ -33,7 +34,13 @@ router.post('/', secure({status:'verified'}),async (req, res) => {
 
 router.get('/', secure({status:'verified'}),async (req, res) => {
     try {
-        let wastes = await knex('wastes').select('id','type','quantity').where('userID', req.user.id);
+        let query = knex('wastes').select('id','type','quantity','status').where('userID', req.user.id);
+        if(req.query.status == "done"){
+            query = query.where('status', 2);
+        }else{
+            query = query.where('status', 1);
+        }
+        let wastes = await query;
         return res.status(200).json(wastes);
     } catch (err) {
         console.log(err);
