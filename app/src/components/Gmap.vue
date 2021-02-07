@@ -26,6 +26,7 @@ export default {
       markers: [],
       places: [],
       currentPlace: null,
+      postalCode: "",
     };
   },
   mounted() {
@@ -45,6 +46,7 @@ export default {
         this.places = [];
       }
       if (this.currentPlace) {
+        this.postalCode = this.currentPlace.address_components[7].long_name;
         const marker = {
           lat: this.currentPlace.geometry.location.lat(),
           lng: this.currentPlace.geometry.location.lng(),
