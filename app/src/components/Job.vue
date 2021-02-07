@@ -1,8 +1,8 @@
 <template>
   <div>
     <h3>{{ title }}</h3>
-    <p class="categorie">Adresse</p>
-    <p class="info">{{ adress }}</p>
+    <p class="categorie">Quantité</p>
+    <p class="info">{{ quantity }}</p>
     <p class="categorie">Date de demande</p>
     <p class="info">{{ dateAsk }}</p>
     <p class="categorie">Date de prise</p>
@@ -16,10 +16,10 @@ export default {
   props: ["job"],
   data() {
     return {
-      title: this.job.name,
-      adress: this.job.adress,
-      dateAsk: this.job.dateAsk,
-      dateTake: this.job.dateTake,
+      title: this.job.type,
+      quantity: this.job.quantity,
+      dateAsk: this.job.createdDate,
+      dateTake: this.job.pickupDate,
     };
   },
 };
