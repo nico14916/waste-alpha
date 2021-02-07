@@ -1,7 +1,14 @@
 <template>
   <div>
     <pre>Quantité:  {{ quantity }}</pre>
-    <input type="range" v-model="quantity" min="0" max="100" step="1" />
+    <input
+      type="range"
+      v-model="quantity"
+      @change="onChange($event)"
+      min="0"
+      max="100"
+      step="1"
+    />
     <p></p>
   </div>
 </template>
@@ -11,6 +18,11 @@ export default {
   name: "Quantity",
   data() {
     return { quantity: 0 };
+  },
+  methods: {
+    onChange() {
+      this.$emit("quantity", this.quantity);
+    },
   },
 };
 </script>

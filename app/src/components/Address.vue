@@ -1,12 +1,12 @@
 <template>
   <div>
     <p class="categorie">Votre adresse</p>
-    <p class="info">{{ adress }}</p>
+    <p class="info">{{ address }}</p>
   </div>
 </template>
 
 <script>
-export default { name: "Adress", props: ["adress"] };
+export default { name: "Address", props: ["address"] };
 </script>
 
 <style lang="scss" scoped>

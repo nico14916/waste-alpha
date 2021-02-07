@@ -1,9 +1,9 @@
 <template>
   <div>
     <p>Demande de récuperation pour {{ type }}</p>
-    <Adress :adress="adress" />
+    <Address :address="address" />
     <hr />
-    <Quantity />
+    <Quantity v-on:quantity="setQuantity" />
     <hr />
     <AddImg />
     <div class="choise">
@@ -16,19 +16,22 @@
 </template>
 
 <script>
-import Adress from "../components/Adress.vue";
+import Address from "../components/Address.vue";
 import Quantity from "../components/Quantity.vue";
 import AddImg from "@/components/AddImg.vue";
 
 export default {
   name: "Form",
-  components: { Adress, Quantity, AddImg },
+  components: { Address, Quantity, AddImg },
   data() {
-    return { type: this.$route.params.waste, adress: "12 grdhthtd h6j 7j7" };
+    return { type: this.$route.params.waste, address: "", quantity: 0 };
   },
   methods: {
     send() {
       this.$router.push({ name: "Home" });
+    },
+    setQuantity(quantityToAdd) {
+      this.quantity = quantityToAdd;
     },
   },
 };
