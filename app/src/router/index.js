@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import store from '@/store'
+import store from "@/store";
 
 Vue.use(VueRouter);
 
@@ -41,9 +41,9 @@ const routes = [
     component: () => import("../views/Actif.vue"),
   },
   {
-    path: "/user/inactif",
-    name: "Inactif",
-    component: () => import("../views/Inactif.vue"),
+    path: "/user/history",
+    name: "History",
+    component: () => import("../views/History.vue"),
   },
   {
     path: "/connect",
@@ -64,12 +64,12 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if(!store.getters.token && to.name != "Connect"){
-    return next('/connect');
-  }else if(store.getters.status == "connecting" && to.name != "PinCheck"){
-    return next('/pin');
-  }else if(store.getters.status == "require-info" && to.name != "Profile"){
-    return next('/profile');
+  if (!store.getters.token && to.name != "Connect") {
+    return next("/connect");
+  } else if (store.getters.status == "connecting" && to.name != "PinCheck") {
+    return next("/pin");
+  } else if (store.getters.status == "require-info" && to.name != "Profile") {
+    return next("/profile");
   }
   return next();
   /*if (to.meta.requiresAuth === true && !store.getters.token) {
@@ -80,6 +80,5 @@ router.beforeEach((to, from, next) => {
     return next();
   }*/
 });
-
 
 export default router;

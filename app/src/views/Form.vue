@@ -8,7 +8,7 @@
     <hr />
     <Quantity @quantity="setQuantity" />
     <hr />
-    <AddImg />
+    <AddImg @image="setImage" />
     <div class="choise">
       <button class="left" @click="$router.push({ name: 'Home' })">
         Annuler
@@ -37,28 +37,22 @@ export default {
   },
   methods: {
     send() {
-      if (this.address && this.quantity > 0 && this.image) {
+      if (this.address && this.quantity > 0) {
         this.$http
-          .post(`${this.$apiUrl}/profile`, {
+          .post(`${this.$apiUrl}/wastes`, {
             address: this.addresss,
             quantity: this.quantity,
-            image: this.image,
           })
-          .then((res) => {
-            this.$store.commit("setToken", res.data.token);
-            window.localStorage.setItem("token", res.data.token);
-            this.$store.commit("setStatus", res.data.status);
-            window.localStorage.setItem("status", res.data.status);
-            this.$store.dispatch("loadToken");
-            this.$router.push({ name: "Home" });
-            this.loading = false;
-          });
+          .then(this.$router.push({ name: "Home" }));
       } else {
         this.error = true;
       }
     },
     setQuantity(quantityToAdd) {
       this.quantity = quantityToAdd;
+    },
+    setImage(imageToAdd) {
+      this.image = imageToAdd;
     },
   },
   created() {

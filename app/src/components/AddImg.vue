@@ -8,7 +8,14 @@
       @change="onFileSelected"
       ref="fileInput"
     />
-    <button @click="$refs.fileInput.click()">Choisir une image</button>
+    <button
+      @click="
+        $refs.fileInput.click();
+        sendImage();
+      "
+    >
+      Choisir une photo
+    </button>
     <img v-if="fileContent" :src="fileContent" />
   </div>
 </template>
@@ -28,12 +35,11 @@ export default {
       reader.onload = function (e) {
         // the result image data
         vm.fileContent = e.target.result;
-        console.log(vm.fileContent);
       };
       // you have to declare the file loading
       reader.readAsDataURL(this.selectedFile);
     },
-    onUpload() {},
+    sendImage() {},
   },
 };
 </script>

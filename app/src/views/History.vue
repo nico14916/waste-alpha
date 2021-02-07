@@ -16,7 +16,7 @@
 import UserMenu from "@/components/UserMenu.vue";
 
 export default {
-  name: "Inactif",
+  name: "History",
   components: {
     UserMenu,
   },
