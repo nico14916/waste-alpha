@@ -42,6 +42,7 @@ export default {
         let formData = new FormData();
         formData.append("type", this.$route.params.waste);
         formData.append("quantity", this.quantity);
+        console.log(this.file);
         if (this.file) {
           formData.append("image", this.file);
         }
