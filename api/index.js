@@ -1,5 +1,6 @@
 "use strict";
 require('dotenv').config();
+process.env.PORT = process.env.PORT || 3000;
 process.env.PRIVATE_KEY = process.env.PRIVATE_KEY.replace(/\\n/g, '\n');
 process.env.PUBLIC_KEY = process.env.PUBLIC_KEY.replace(/\\n/g, '\n');
 
@@ -20,6 +21,6 @@ app.use(function(err, req, res, next) {
 
 app.use(require('./routes'));
 
-app.listen(3000, () => {
-    console.log("Server running on port 3000");
+app.listen(process.env.PORT, () => {
+    console.log(`Server running on port ${process.env.PORT}`);
 });
