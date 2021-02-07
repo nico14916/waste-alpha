@@ -4,7 +4,7 @@
     <input
       style="display: none"
       type="file"
-      accept=".jgp,.jpeg"
+      accept=".jpg,.jpeg"
       @change="onFileSelected"
       ref="fileInput"
     />
@@ -39,7 +39,9 @@ export default {
       // you have to declare the file loading
       reader.readAsDataURL(this.selectedFile);
     },
-    sendImage() {},
+    sendImage() {
+      this.$emit("image", this.selectedFile);
+    },
   },
 };
 </script>

@@ -33,6 +33,7 @@ export default {
       quantity: 0,
       image: null,
       error: false,
+      file: null,
     };
   },
   methods: {
@@ -41,6 +42,9 @@ export default {
         let formData = new FormData();
         formData.append("type", this.$route.params.waste);
         formData.append("quantity", this.quantity);
+        if (this.file) {
+          formData.append("image", this.file);
+        }
         this.$http
           .post(`${this.$apiUrl}/wastes`, formData, {
             headers: {
@@ -55,8 +59,8 @@ export default {
     setQuantity(quantityToAdd) {
       this.quantity = quantityToAdd;
     },
-    setImage(imageToAdd) {
-      this.image = imageToAdd;
+    setImage(image) {
+      this.file = image;
     },
   },
   created() {
