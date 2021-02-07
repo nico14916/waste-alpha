@@ -1,11 +1,11 @@
 <template>
   <div class="register">
+    <h1>Profile</h1>
       <form @submit.prevent="">
       <label for="firstname">Prénom</label>
       <input id="firstname" type="text" v-model="firstname" />
       <label for="lastname">Nom</label>
       <input id="lastname" type="text" v-model="lastname" />
-      <p v-if="error" class="error">Email or password incorrect</p>
       <button>Suivant</button>
     </form>
   </div>

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import store from '@/store'
 
 Vue.use(VueRouter);
 
@@ -20,9 +21,9 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
-    path: "/register",
-    name: "Register",
-    component: () => import("../views/Register.vue"),
+    path: "/profile",
+    name: "Profile",
+    component: () => import("../views/Profile.vue"),
   },
   {
     path: "/form/:waste",
@@ -34,6 +35,16 @@ const routes = [
     name: "User",
     component: () => import("../views/User.vue"),
   },
+  {
+    path: "/connect",
+    name: "Connect",
+    component: () => import("../views/Connect.vue"),
+  },
+  {
+    path: "/pin",
+    name: "PinCheck",
+    component: () => import("../views/PinCheck.vue"),
+  },
 ];
 
 const router = new VueRouter({
@@ -41,5 +52,24 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+  if(!store.getters.token && to.name != "Connect"){
+    return next('/connect');
+  }else if(store.getters.status == "connecting" && to.name != "PinCheck"){
+    return next('/pin');
+  }else if(store.getters.status == "require-info" && to.name != "Profile"){
+    return next('/profile');
+  }
+  return next();
+  /*if (to.meta.requiresAuth === true && !store.getters.token) {
+    return next('/login');
+  } else if (to.meta.requiresAuth === false && store.getters.token) {
+    return next('/');
+  } else {
+    return next();
+  }*/
+});
+
 
 export default router;

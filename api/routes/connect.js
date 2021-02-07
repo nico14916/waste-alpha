@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
                 await knex('users').update('pin', pin).where('id', user.id);
                 id = user.id;
             } else {
-                let newUser = await knex('users','id').insert({
+                let newUser = await knex('users').returning('id').insert({
                     phone: validated.value.phone,
                     pin: pin
                 });
