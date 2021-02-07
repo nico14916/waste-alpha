@@ -5,7 +5,7 @@
       $router.push({ name: `${type.path}`, params: { waste: type.name } })
     "
   >
-    <img :src="getImg(type.image)" height="50" width="50" />
+    <img :src="getImg(type.image)" height="40" width="40" />
     <p>{{ type.name }}</p>
   </button>
 </template>
@@ -35,12 +35,12 @@ export default {
   text-decoration: none;
   color: white;
   display: block;
-  height: 9rem;
-  width: 9rem;
+  height: 7rem;
+  width: 7rem;
 }
 p {
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.75rem;
   line-height: 125%;
   color: black;
 }
