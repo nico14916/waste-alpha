@@ -50,6 +50,7 @@ div {
 div > p {
   flex: 100%;
   margin-bottom: 1rem;
+  font-size: 1.25rem;
 }
 img {
   max-height: 40vh;

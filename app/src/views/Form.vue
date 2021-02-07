@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>Demande de récuperation pour {{ type }}</p>
-    <Adress />
+    <Adress :adress="adress" />
     <hr />
     <Quantity />
     <hr />
@@ -24,7 +24,7 @@ export default {
   name: "Form",
   components: { Adress, Quantity, AddImg },
   data() {
-    return { type: this.$route.params.waste };
+    return { type: this.$route.params.waste, adress: "12 grdhthtd h6j 7j7" };
   },
   methods: {
     send() {

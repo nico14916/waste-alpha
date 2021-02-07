@@ -19,7 +19,8 @@
       <p class="info">{{ cellNumber }}</p>
 
       <p class="categorie">Adresses</p>
-      <p class="info">{{ adress }}</p>
+      <p v-if="!modifie" class="info">{{ adress }}</p>
+      <div v-if="modifie"><Gmap /></div>
     </div>
     <div class="choise">
       <button class="left" @click="$router.push({ name: 'Home' })">Back</button>
@@ -30,11 +31,13 @@
 
 <script>
 import UserMenu from "@/components/UserMenu.vue";
+import Gmap from "@/components/Gmap.vue";
 
 export default {
   name: "Information",
   components: {
     UserMenu,
+    Gmap,
   },
   data() {
     return {

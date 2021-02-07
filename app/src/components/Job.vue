@@ -16,10 +16,10 @@ export default {
   props: ["job"],
   data() {
     return {
-      title: "Déchet Toxi",
-      adress: "21 efrfsdefev g6h 7k9",
-      dateAsk: "01/06/2021",
-      dateTake: "00/00/0000",
+      title: this.job.name,
+      adress: this.job.adress,
+      dateAsk: this.job.dateAsk,
+      dateTake: this.job.dateTake,
     };
   },
   methods: {},

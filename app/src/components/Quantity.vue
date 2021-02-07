@@ -1,6 +1,6 @@
 <template>
   <div>
-    <pre>Quantité:      {{ quantity }}</pre>
+    <pre>Quantité:  {{ quantity }}</pre>
     <input type="range" v-model="quantity" min="0" max="100" step="1" />
     <p></p>
   </div>
@@ -26,6 +26,7 @@ div {
 div > pre {
   flex: 100%;
   margin-bottom: 1rem;
+  font-size: 1.25rem;
 }
 
 input[type="range"]::-moz-range-track {
