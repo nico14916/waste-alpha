@@ -34,7 +34,7 @@ router.post('/', secure({status:'verified'}),async (req, res) => {
 
 router.get('/', secure({status:'verified'}),async (req, res) => {
     try {
-        let query = knex('wastes').select('id','type','quantity','status').where('userID', req.user.id);
+        let query = knex('wastes').select('id','type','quantity','status','createdDate','pickupDate').where('userID', req.user.id);
         if(req.query.status == "done"){
             query = query.where('status', 2);
         }else{
