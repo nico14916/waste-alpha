@@ -39,10 +39,10 @@ export default {
           this.$store.commit("setStatus", res.data.status);
           window.localStorage.setItem("status", res.data.status);
           this.$store.dispatch("loadToken");
-          if(res.data.status == "require-info"){
-            this.$router.push({name:'Pin'});
-          }else{
-            this.$router.push({name:'Home'});
+          if (res.data.status == "require-info") {
+            this.$router.push({ name: "Pin" });
+          } else {
+            this.$router.push({ name: "Home" });
           }
           this.loading = false;
         });
