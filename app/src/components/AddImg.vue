@@ -4,7 +4,7 @@
     <input
       style="display: none"
       type="file"
-      accept="image/*"
+      accept=".jgp,.jpeg"
       @change="onFileSelected"
       ref="fileInput"
     />

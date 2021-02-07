@@ -4,7 +4,7 @@
     <div class="container">
       <div class="up">
         <h2>Information</h2>
-        <button @click="editMode">Edit</button>
+        <button @click="editMode">Modifier</button>
       </div>
 
       <p class="categorie">Prénom</p>
@@ -19,12 +19,14 @@
       <p class="info">{{ cellNumber }}</p>
 
       <p class="categorie">Adresses</p>
-      <p v-if="!modifie" class="info">{{ adress }}</p>
-      <div v-if="modifie"><Gmap /></div>
+      <p v-if="!modifie" class="info">{{ address }}</p>
+      <div v-if="modifie"><Gmap @location="setLocation" /></div>
     </div>
     <div class="choise">
-      <button class="left" @click="$router.push({ name: 'Home' })">Back</button>
-      <button class="right" @click="send">save</button>
+      <button class="left" @click="$router.push({ name: 'Home' })">
+        Retour
+      </button>
+      <button class="right" @click="send">Enregister</button>
     </div>
   </div>
 </template>
@@ -42,25 +44,60 @@ export default {
   data() {
     return {
       modifie: false,
-      firstName: "Lyssandre",
-      lastName: "Chrzaszcz",
-      cellNumber: "(438) 343-4545",
-      adress: "12 Rue fsefef h5h 5h6",
+      error: false,
+      firstName: null,
+      lastName: null,
+      cellNumber: null,
+      address: null,
+      location: null,
     };
   },
   methods: {
     editMode() {
       this.modifie = !this.modifie;
     },
+    setLocation(location) {
+      this.location = location;
+    },
     send() {
       if (this.modifie) {
-        // const cell = this.cellNumber.replace(/\D/g, "");
-        console.log("good mode");
+        this.error = false;
+        if (this.firstname && this.lastname && this.address) {
+          this.$http
+            .post(`${this.$apiUrl}/profile`, {
+              firstname: this.firstname,
+              lastname: this.lastname,
+              postalCode: this.location.postalCode,
+              address: this.location.address,
+            })
+            .then((res) => {
+              this.$store.commit("setToken", res.data.token);
+              window.localStorage.setItem("token", res.data.token);
+              this.$store.commit("setStatus", res.data.status);
+              window.localStorage.setItem("status", res.data.status);
+              this.$store.dispatch("loadToken");
+              this.$router.push({ name: "Home" });
+            });
+        } else {
+          this.error = true;
+        }
         this.modifie = !this.modifie;
-      } else {
-        console.log("bad mode");
       }
     },
+  },
+  created() {
+    this.$http.get(`${this.$apiUrl}/profile`).then((res) => {
+      this.firstName = res.data.firstname;
+      this.lastName = res.data.lastname;
+      this.cellNumber =
+        "(" +
+        res.data.phone.match(/^(\d{3})(\d{3})(\d{4})$/)[1] +
+        ") " +
+        res.data.phone.match(/^(\d{3})(\d{3})(\d{4})$/)[2] +
+        "-" +
+        res.data.phone.match(/^(\d{3})(\d{3})(\d{4})$/)[3];
+      this.address = res.data.address;
+    });
   },
 };
 </script>
