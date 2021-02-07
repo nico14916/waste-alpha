@@ -12,11 +12,17 @@ module.exports = function (options) {
         }
 
         if (options) {
-            if (options.status && decoded.status !== options.status ) {
-                return res.status(401).json({ message: "auth.unauthorised" });
+            if (options.status) {
+                if (Array.isArray(options.status)) {
+                    if (!options.status.includes(decoded.status)) {
+                        return res.status(401).json({ message: "auth.unauthorised" });
+                    }
+
+                } else if (decoded.status !== options.status) {
+                    return res.status(401).json({ message: "auth.unauthorised" });
+                }
             }
         }
-
 
         req.user = { id: decoded.id };
         next();

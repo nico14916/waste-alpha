@@ -11,7 +11,7 @@ const profileSchema = Joi.object({
     address: Joi.string().max(100).required()
 });
 
-router.post('/', secure({ status: 'require-info' }), async (req, res) => {
+router.post('/', secure({ status: ['require-info','verified'] }), async (req, res) => {
     let validated = profileSchema.validate(req.body);
 
     if (validated.error) {
@@ -30,6 +30,18 @@ router.post('/', secure({ status: 'require-info' }), async (req, res) => {
             { algorithm: 'RS256', expiresIn: 365 * 24 * 60 * 60 }
         );
         return res.status(200).json({ token, status: "verified" });
+
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: "server.error" });
+    }
+});
+
+router.get('/', secure({ status: 'verified' }), async (req, res) => {
+    try {
+        let profile = await knex('users').select('phone','firstname','lastname','address','postalCode').where('id', req.user.id).first();
+        
+        return res.status(200).json(profile);
 
     } catch (err) {
         console.log(err);
