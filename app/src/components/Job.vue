@@ -22,7 +22,6 @@ export default {
       dateTake: this.job.dateTake,
     };
   },
-  methods: {},
 };
 </script>
 
