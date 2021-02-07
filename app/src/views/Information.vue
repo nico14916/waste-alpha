@@ -58,15 +58,16 @@ export default {
     },
     setLocation(location) {
       this.location = location;
+      console.log(location);
     },
     send() {
       if (this.modifie) {
         this.error = false;
-        if (this.firstname && this.lastname && this.address) {
+        if (this.firstName && this.lastName && this.location) {
           this.$http
             .post(`${this.$apiUrl}/profile`, {
-              firstname: this.firstname,
-              lastname: this.lastname,
+              firstname: this.firstName,
+              lastname: this.lastName,
               postalCode: this.location.postalCode,
               address: this.location.address,
             })
