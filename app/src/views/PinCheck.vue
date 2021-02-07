@@ -28,6 +28,7 @@ export default {
   },
   methods: {
     submit() {
+      this.loading = true;
       this.$http
         .post(`${this.$apiUrl}/pin`, {
           pin: this.pin,
@@ -43,7 +44,7 @@ export default {
           }else{
             this.$router.push({name:'Home'});
           }
-          
+          this.loading = false;
         });
     },
   },

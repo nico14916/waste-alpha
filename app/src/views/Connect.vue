@@ -28,6 +28,7 @@ export default {
   },
   methods: {
     submit() {
+      this.loading = true;
       this.$http
         .post(`${this.$apiUrl}/connect`, {
           phone: this.phone.replace(/[^0-9.]/g, ""),
@@ -39,6 +40,7 @@ export default {
           window.localStorage.setItem("status", res.data.status);
           this.$store.dispatch("loadToken");
           this.$router.push({name:'PinCheck'});
+          this.loading = false;
         });
     },
   },
