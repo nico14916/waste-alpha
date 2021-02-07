@@ -25,27 +25,20 @@ module.exports = async () => {
             table.string('firstname', 100);
             table.string('lastname', 100);
 
-            table.integer('pin', 6);
-        }).createTable('cities', (table) => {
-            table.increments('id').primary();
-            table.string('city', 100);
-        }).createTable('addresses', (table) => {
-            table.increments('id').primary();
-            table.integer('userID').unsigned().references('id').inTable('users');
             table.string('address', 100);
-            table.integer('cityID').unsigned().references('id').inTable('cities');
             table.decimal('lat', 10, 8);
             table.decimal('lng', 11, 8);
+            table.string('postalCode', 6);
+
+            table.integer('pin', 6);
         }).createTable('wastes', (table) => {
             table.increments('id').primary();
             table.integer('userID').unsigned().references('id').inTable('users');
-            table.integer('addressID').unsigned().references('id').inTable('addresses');
             table.string('type', 100);
             table.integer('quantity', 3);
         });
         
         version++;
-        await knex('cities').insert([{ city: 'Montreal' }, { city: 'Laval' }]);
     }
     
 

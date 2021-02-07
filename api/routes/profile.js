@@ -6,7 +6,9 @@ const secure = require('../secure');
 
 const profileSchema = Joi.object({
     firstname: Joi.string().max(100).required(),
-    lastname: Joi.string().max(100).required()
+    lastname: Joi.string().max(100).required(),
+    postalCode: Joi.string().max(6).required(),
+    address: Joi.string().max(100).required()
 });
 
 router.post('/', secure({ status: 'require-info' }), async (req, res) => {

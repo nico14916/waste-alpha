@@ -3,6 +3,7 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
+import axios from 'axios'
 
 import * as VueGoogleMaps from "vue2-google-maps";
 
@@ -10,6 +11,8 @@ import "./theme.scss";
 import "./main.scss";
 
 Vue.config.productionTip = false;
+Vue.prototype.$http = axios;
+Vue.prototype.$apiUrl = process.env.VUE_APP_API;
 
 Vue.use(VueGoogleMaps, {
   load: {
